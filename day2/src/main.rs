@@ -23,16 +23,10 @@ fn main() {
 fn part_1(input: String) -> i128 {
   let mut res = 0;
   for line in input.split(',') {
-    for id in split_range(line) {
-      res += match is_only_repeating_digits(id) {
-        true => id,
-        false => 0,
-      };
-    }
-  };
+    res += split_range(line).filter(|id| is_only_repeating_digits(*id)).sum::<i128>();
+  }
   res
 }
-
 
 fn split_range(range: &str) -> std::ops::RangeInclusive<i128>  {
   let mut range_split = range.split('-');
