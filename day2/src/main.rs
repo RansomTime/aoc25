@@ -65,7 +65,7 @@ fn is_only_repeating_digits(input: i128) -> bool {
       continue;
     }
     let mut cmp = String::from("");
-    while cmp.chars().count() < input_str.chars().count() {
+    for _ in 0..input_str.chars().count() / (i + 1) {
       cmp = cmp + &cnd;
     }
     if cmp == input_str {
