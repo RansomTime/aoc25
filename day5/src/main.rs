@@ -96,7 +96,7 @@ fn sort_ranges(mut ranges: Vec<Range> ) -> Vec<Range> {
         changes = true;
       }
     }
-    res.push(e.clone());
+    res.push(e);
   }
   if changes {
     sort_ranges(res)
@@ -165,7 +165,7 @@ impl Range {
   }
   
   fn merge(&mut self, other: Range) {
-    match self.compare( other) {
+    match self.compare(other) {
       RangeContainsResult::NoOverlap => panic!("Attemted to merge 2 non-overlapping ranges"),
       RangeContainsResult::OtherIsSubset => (),
       RangeContainsResult::SubsetOfOther => {
@@ -178,10 +178,7 @@ impl Range {
   }
   
   fn overlaps(&mut self, other: Range) -> bool {
-    match self.compare( other) {
-      RangeContainsResult::NoOverlap => false,
-      _ => true,
-    }
+    !matches!(self.compare(other), RangeContainsResult::NoOverlap)
   }
 }
 
